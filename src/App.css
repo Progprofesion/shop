@@ -1,0 +1,22 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* flex-direction: column; */
+  width: 100%;
+  min-height: 100vh;
+  background-color: grey;
+}
+
+.container {
+  width: 1224px;
+  margin: 0 auto;
+}
+
+.navigate {
+  cursor: pointer;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 65px;
+}

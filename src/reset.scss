@@ -1,0 +1,82 @@
+/* Базовая сброска стилей с учетом семантики и доступности */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Единый расчет размеров */
+  margin: 0;
+  padding: 0;
+}
+
+/* Убираем дефолтные стили для списков */
+ol:where([class]),
+ul:where([class]) {
+  list-style: none;
+}
+
+/* Наследование шрифтов для форм */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Убираем дефолтные стили кнопок */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Изображения по умолчанию */
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Сброс таблиц */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Ссылки без подчеркивания */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Убираем анимации для людей с предпочтением reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Скрытие элементов для скринридеров */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Удаляем дефолтный outline, но сохраняем доступность */
+:focus:not(:focus-visible) {
+  outline: none;
+}

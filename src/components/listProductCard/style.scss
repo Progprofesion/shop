@@ -1,0 +1,22 @@
+.listProductCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 25px;
+  min-height: 90vh;
+  // background-color: aliceblue;
+  border: 1px solid brown;
+  border-radius: 10px;
+  &__wrappAction {
+    width: 250px;
+  }
+  &__filter {
+    margin: 25px 25px 0 25px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    height: 35px;
+  }
+}
