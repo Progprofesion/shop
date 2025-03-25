@@ -7,19 +7,7 @@ export enum EQueryKeys {
 
 // hooks/useGetProduct.ts
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-};
+import { Product } from "../types/types";
 
 const fetchProduct = async (productId: number): Promise<Product> => {
   const response = await fetch(
@@ -31,8 +19,8 @@ const fetchProduct = async (productId: number): Promise<Product> => {
     try {
       const errorData = await response.json();
       errorMessage = errorData.message || errorMessage;
-    } catch (e) {
-      // Если ответ не в JSON формате
+      //eslint-disable-next-line
+    } catch (e: unknown) {
       errorMessage = await response.text();
     }
     throw new Error(errorMessage);
@@ -51,17 +39,12 @@ const useGetProduct = (productId: number) => {
     staleTime: 60 * 1000, // 1 минута до устаревания данных
     gcTime: 5 * 60 * 1000, // 5 минут хранения в кэше
 
-    // onError: (error) => {
-    //   console.error("Ошибка при загрузке продукта:", error.message);
-    //   // Можно добавить дополнительную логику обработки ошибок
-    // },
-
     // Оптимизация для предзагрузки данных
     placeholderData: () => {
       const cachedProducts = queryClient.getQueryData<Product[]>([
         EQueryKeys.PRODUCTS_LIST,
       ]);
-      return cachedProducts?.find((p) => p.id === productId);
+      return cachedProducts?.find((p) => +p.id === productId);
     },
   });
 };

@@ -5,11 +5,16 @@
   flex-wrap: wrap;
   margin: 25px;
   min-height: 90vh;
-  // background-color: aliceblue;
-  border: 1px solid brown;
+  min-width: 96vw;
+  box-shadow: 1px 6px 5px #9fb4c5;
   border-radius: 10px;
   &__wrappAction {
     width: 250px;
+    display: flex;
+    flex-direction: column;
+    button {
+      margin: 5px;
+    }
   }
   &__filter {
     margin: 25px 25px 0 25px;
@@ -18,5 +23,21 @@
     border: none;
     outline: none;
     height: 35px;
+    background-color: aliceblue;
+    box-shadow: 1px 6px 5px #9fb4c5;
+  }
+  &__count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 75px;
+    right: 25px;
+    background-color: brown;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
   }
 }

@@ -15,8 +15,12 @@
 
 .navigate {
   cursor: pointer;
-  position: absolute;
-  top: 25px;
-  right: 25px;
+  position: fixed;
+  top: 35px;
+  right: 35px;
   width: 65px;
+}
+
+label {
+  cursor: pointer;
 }

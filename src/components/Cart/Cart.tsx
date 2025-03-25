@@ -1,76 +1,200 @@
 import home from "../../assets/home.svg";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
-import { useStore } from "zustand";
-import { useCartItems } from "../../store/useStore";
-import { useEffect } from "react";
+
+import {
+  useCartItems,
+  useCartStore,
+  useSelectedItems,
+  useTotalItems,
+  useTotalPrice,
+} from "../../store/useStore";
+import { useState } from "react";
+import deleteBasket from "../../assets/delete.svg";
+import ModalWindow from "../ModalWindow";
+import { Product } from "../../types/types";
+import { Button } from "@mui/material";
 
 const Cart = () => {
-  // const { products, addProduct, removeProduct } = useStore();
   const navigate = useNavigate();
   const handleToBasket = () => {
     navigate("/");
   };
+  const [isModal, setIsModal] = useState(false);
   const items = useCartItems();
+  const total = useTotalItems();
+  const totalPrice = useTotalPrice();
+  const selectedItems = useSelectedItems();
+  const toggleItemSelection = useCartStore.getState().toggleItemSelection;
+  const clearCart = useCartStore.getState().clearCart;
+  const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
+  const [localTotalPrice, setLocalTotalPrice] = useState(0);
+  const resetAllCheckboxes = useCartStore.getState().resetSelection;
 
-  // Получаем массив продуктов из items
   const products = Object.values(items);
-  useEffect(() => {
-    console.log("store", products);
-  }, [items]);
 
-  // const cartData =
+  const handleSubmitOrder = () => {
+    const selectedProductIds = Object.entries(selectedItems)
+      //eslint-disable-next-line
+      .filter(([_, isSelected]) => isSelected)
+      .map(([id]) => id);
+
+    if (selectedProductIds.length === 0) {
+      setIsModal(true);
+      return;
+    }
+
+    const selectedProductsData = selectedProductIds.map((id) => ({
+      ...items[id],
+      quantity: items[id]?.quantity,
+      totalPrice: items[id].price * items[id].quantity!,
+    }));
+
+    // Сохраняем общую сумму до очистки
+    setLocalTotalPrice(totalPrice);
+    setSelectedProducts(selectedProductsData);
+    setIsModal(true);
+
+    resetAllCheckboxes();
+    // clearCart(); // Очищаем корзину после сохранения данных
+  };
+
   return (
     <section className="cart">
+      {isModal && (
+        <ModalWindow
+          title={
+            selectedProducts.length > 0
+              ? ` Выбранные товары на сумму ${localTotalPrice.toFixed(2)} $ `
+              : "Корзина пуста"
+          }
+          children={selectedProducts.map((product) => (
+            <div key={product.id} className="product-item">
+              <div className="product-info">
+                <h3>{product.title}</h3>
+                <p>Количество: {product.quantity}</p>
+                <p>Цена: {product.price}$</p>
+                <p>Общая сумма {product.totalPrice!.toFixed(2)}</p>
+              </div>
+            </div>
+          ))}
+          setClose={setIsModal}
+        />
+      )}
       <img
         onClick={handleToBasket}
         className="navigate"
         src={home}
         alt="Карзина"
       />
-      <div className="cart__wrapp">
+
+      <div className="cart__wrappInfo">
         <div className="cart__info">
-          <label htmlFor="">
+          <label htmlFor="selectAll">
             Выбрать все
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              id="selectAll"
+              checked={
+                products.length > 0 &&
+                products.every((product) => selectedItems[product.id])
+              }
+              onChange={() => {
+                products.forEach((product) => toggleItemSelection(product.id));
+              }}
+            />
           </label>
-          <button>Удалить все</button>
+          <button onClick={() => clearCart()}>Удалить все</button>
         </div>
+
         <div className="cart__registerPrice">
-          <button>Перейти к оформлению</button>
+          <button
+            onClick={() => {
+              handleSubmitOrder();
+              setIsModal(true);
+            }}
+          >
+            Перейти к оформлению
+          </button>
+
           <hr />
+
           <div className="cart__registerPrice__info">
             <p>Ваша корзина</p>
             <div>
-              Товары 1 один <p>цена 156</p>
+              Товары {total}
+              <p>цена {totalPrice.toFixed(2)} $</p>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="cart__wrapp">
         {products.map((product) => {
+          const isSelected = selectedItems[product.id] || false;
+
           return (
-            <div className="cart__content">
-              <img
-                className="cart__image"
-                src={product.image && product.image.toString()}
-                alt="Карточка"
-              />
+            <div key={product.id} className="cart__content">
+              <figure>
+                <img
+                  width="400"
+                  height="250"
+                  loading="lazy"
+                  className="cart__image"
+                  src={product.image && product.image.toString()}
+                  alt="Карточка"
+                />
+              </figure>
+
               <div className="cart__content__info">
                 <div className="cart__content__descr">
-                  <p>{product.title}</p>
-                  <p>{product.description}</p>
+                  <h3>{product.title}</h3>
+                  <label>
+                    выбрать
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleItemSelection(product.id)}
+                    />
+                  </label>
                 </div>
-                <div className="cart__content__actions">
-                  <img src="" alt="Избранное" />
-                  <img src="" alt="Удалить" />
+
+                <span className="cart__indicator">
+                  <p>{product.quantity}</p>
+                </span>
+
+                <div className="cart__content__addPrice">
+                  <p className="cart__price">цена {product.price}$</p>
+                  <Button
+                    className="cart__button"
+                    type="button"
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => useCartStore.getState().addItem(product)}
+                  >
+                    добавить
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    color="primary"
+                    className="cart__button"
+                    onClick={() =>
+                      useCartStore.getState().removeItem(product.id)
+                    }
+                  >
+                    убавить
+                  </Button>
                 </div>
               </div>
-              <div className="cart__content__addPrice">
-                <p className="cart__price">{product.price}$</p>
-                -<input type="number" />+
-                <label className="cart__price__select" htmlFor="">
-                  выбрать
-                  <input type="checkbox" />
-                </label>
+              <div className="cart__content__basket">
+                <img
+                  onClick={() =>
+                    useCartStore.getState().removeItemCompletely(product.id)
+                  }
+                  src={deleteBasket}
+                  alt="Удалить"
+                />
               </div>
             </div>
           );

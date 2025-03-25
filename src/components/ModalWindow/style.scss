@@ -1,0 +1,36 @@
+.modal-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.46);
+  z-index: 5;
+}
+
+.modal-window > article {
+  padding: 25px;
+  max-width: 520px;
+  margin: auto;
+  margin-top: 220px;
+  background-color: var(--color-bg-lt);
+  color: black;
+  border-radius: 26px;
+  box-shadow: 0 2px 5px rgba(67, 67, 77, 0.1);
+  background-color: #fff;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.modal-head h2 {
+  font-size: var(--fs-h2);
+  font-weight: bold;
+}
+
+.modal-head .modal-close {
+  cursor: pointer;
+}

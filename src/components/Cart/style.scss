@@ -2,48 +2,115 @@
   width: 100vw;
   margin: auto;
 
+  &__button {
+    // border: 1px solid red;
+    max-width: 100px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  &__wrappInfo {
+    max-width: 500px;
+  }
+
   &__wrapp {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 50px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(50px, 1fr);
+    justify-items: center;
     gap: 20px;
     padding: 20px;
     max-width: 1224px;
-
+    box-shadow: 1px 6px 5px #cfe3f2;
     margin: 0 auto;
-    background-color: aliceblue;
+  }
+
+  &__indicator {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
   }
   &__info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
     background-color: rgb(190, 190, 190);
+    > label > input {
+      width: 15px;
+      height: 15px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
   }
   &__content {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(173, 180, 184);
-    min-width: 500px;
-    border: 1px solid brown;
+    max-width: 425px;
+    box-shadow: 1px 6px 5px #cfe3f2;
     border-radius: 10px;
     min-height: 250px;
     max-height: 500px;
     padding: 25px;
+    position: relative;
+
+    &__info {
+      position: relative;
+    }
+    &__descr {
+      max-width: 155px;
+      label {
+        margin: 5px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        cursor: pointer;
+        > input {
+          margin-left: 15px;
+          cursor: pointer;
+        }
+      }
+    }
+    &__basket {
+      position: absolute;
+      left: 15;
+      bottom: 15px;
+      cursor: pointer;
+      width: 50px;
+    }
     &__addPrice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
       margin-left: 50px;
-      > input {
-        width: 50px;
+      button {
+        margin-top: 10px;
       }
     }
   }
   &__price {
     color: rgb(74, 56, 56);
     &__select {
-      display: block;
+      display: flex;
       margin-top: 10px;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
     }
   }
   &__image {
-    height: 250px;
+    width: 50%;
+    height: 50%;
   }
   &__registerPrice {
     &__info {

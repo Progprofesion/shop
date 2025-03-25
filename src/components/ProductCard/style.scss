@@ -1,8 +1,25 @@
 .product {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 25px;
   max-width: 350px;
-  min-height: 550px;
-  border: 1px solid red;
+  height: 550px;
+  box-shadow: 1px 6px 5px #cfe3f2;
   border-radius: 10px;
   padding: 15px;
+
+  &__image {
+    width: 40%;
+  }
+
+  &__description {
+    height: 205px;
+    overflow-x: hidden;
+  }
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
 }
