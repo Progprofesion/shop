@@ -12,10 +12,10 @@
   }
 
   &__wrapp {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: minmax(50px, 1fr);
-    justify-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
     max-width: 1224px;
@@ -109,7 +109,6 @@
   }
   &__image {
     width: 50%;
-    height: 50%;
   }
   &__registerPrice {
     &__info {
