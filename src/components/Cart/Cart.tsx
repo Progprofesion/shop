@@ -108,15 +108,18 @@ const Cart = () => {
         </div>
 
         <div className="cart__registerPrice">
-          <button
+          <Button
+            className="cart__button"
+            type="button"
+            variant="outlined"
+            color="primary"
             onClick={() => {
               handleSubmitOrder();
               setIsModal(true);
             }}
           >
             Перейти к оформлению
-          </button>
-
+          </Button>
           <hr />
 
           <div className="cart__registerPrice__info">
@@ -141,8 +144,8 @@ const Cart = () => {
                   height="250"
                   loading="lazy"
                   className="cart__image"
-                  src={product.image && product.image.toString()}
-                  alt="Карточка"
+                  src={product.image.toString()}
+                  alt={product.title}
                 />
               </figure>
 
