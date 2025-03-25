@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import "./reset.scss";
 import ListProductCard from "./components/listProductCard/ListProductCard";
-import Cart from "./components/Cart/Cart";
 import { lazy } from "react";
 
 // Создаем экземпляр QueryClient
