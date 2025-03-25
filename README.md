@@ -1,54 +1,44 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Проект Каталог товаров на React.ts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+(Стили минимальные)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Функционал: 
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Главная страница: список карточек товаров с информацией(заголовок, цена, картинка, описание товара и кнопка "купить" каждое нажатие добавляет позицию в корзину), кнопки(фильрация) "цена больше/меньше", "рейтинг больше/меньше", поле для поиска с оптимизацией типа Deabounce, значек корзины с индиктором количества товаров при клике на которую срабатывает переход на страницу корзины.  
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+
+Страница корзины: список добавленных товаров в которых можно добавить/убавить позицию, поле цена, индикатором количества товаров и чекбокс "выбрать", что бы отметить товары для оформления, также в левом верхнем углу экрана есть поля с информацией о общем количестве товаров и общей суммы еще есть кнопки "выбрать все" "удалить все" и "Перейти к оформлению" при клике на которую появится модальное окно с заказом.
+
+
+Стек:
+vite,
+
+
+typescript,
+
+
+ "@tanstack/react-query": "^5.69.0" для запросов с настроенным кешированием данных.
+
+ 
+"@mui/material": "^6.4.8",
+
+
+ "zustand": "^5.0.3",
+
+ 
+"react-router-dom": "^7.4.0",
+
+
+ React.lazy.
+
+
+https://shop-eta-seven-54.vercel.app/
+
+
+Запуск npm i > npm run dev 
