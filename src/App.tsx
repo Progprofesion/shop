@@ -4,6 +4,7 @@ import "./App.css";
 import "./reset.scss";
 import ListProductCard from "./components/listProductCard/ListProductCard";
 import { lazy } from "react";
+import NotFoundPage from "./components/NotFoundPage/NotFoundPage.tsx";
 
 // Создаем экземпляр QueryClient
 const queryClient = new QueryClient();
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ListProductCard />} />
           <Route path="/cart" element={<CartLazy />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
