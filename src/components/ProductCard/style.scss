@@ -16,6 +16,21 @@
   &__description {
     height: 205px;
     overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #cfe3f2;
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #8cb1cd;
+      border-radius: 20px;
+      border: 1px solid #cfe3f2;
+    }
   }
   &__footer {
     display: flex;
