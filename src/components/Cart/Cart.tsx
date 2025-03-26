@@ -56,7 +56,7 @@ const Cart = () => {
     setIsModal(true);
 
     resetAllCheckboxes();
-    // clearCart(); // Очищаем корзину после сохранения данных
+    clearCart();
   };
 
   return (

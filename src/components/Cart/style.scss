@@ -57,8 +57,7 @@
     max-width: 425px;
     box-shadow: 1px 6px 5px #cfe3f2;
     border-radius: 10px;
-    min-height: 250px;
-    max-height: 500px;
+    height: 350px;
     padding: 25px;
     position: relative;
 
@@ -67,6 +66,9 @@
     }
     &__descr {
       max-width: 155px;
+      > h3 {
+        width: 140px;
+      }
       label {
         margin: 5px;
         width: 100%;
